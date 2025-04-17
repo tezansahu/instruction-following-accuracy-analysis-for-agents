@@ -1,3 +1,4 @@
+import json
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -840,3 +841,16 @@ def generate_if_accuracy_dashboard(data):
 
     with tab4:
         show_conversation_analysis(conv_df, filtered_conversations, conversation_map)
+
+
+st.set_page_config(layout="wide")
+
+
+##################################################################################
+json_file = st.file_uploader("Upload IF-Accuracy Analysis file", type=["json"])
+
+if json_file is not None:
+    # Load JSON data
+    data = json.load(json_file)
+
+    generate_if_accuracy_dashboard(data)
